@@ -34,11 +34,11 @@ d3.csv("assets/data/data.csv").then(function(censusData) {
     // Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(censusData, d => d.poverty)])
+      .domain([(d3.min(censusData, d => d.poverty)-1), (d3.max(censusData, d => d.poverty)+1)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(censusData, d => d.healthcare)])
+      .domain([0, (d3.max(censusData, d => d.healthcare)+ 2)])
       .range([height, 0]);
 
     // Create axis functions
@@ -116,6 +116,5 @@ d3.csv("assets/data/data.csv").then(function(censusData) {
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("In Poverty (%)");
-  }).catch(function(error) {
-    console.log(error);
+  
   });
